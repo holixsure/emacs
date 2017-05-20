@@ -3,40 +3,18 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
 
-(require 'cl)
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
 
-(defvar my/packages '(
-		      company
-		      monokai-theme
-		      hungry-delete
-		      swiper
-		      counsel
-		      smartparens
-		      js2-mode
-		      nodejs-repl
-		      exec-path-from-shell
-		      popwin
-		      ) "Default packages")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
-(setq package-selected-packages my/packages)
+(require 'init-packages)
 
-(defun my/packages-installed-p ()
-  (loop for pkg in my/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (my/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
+(setq ring-bell-function 'ignore)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (global-linum-mode t)
@@ -48,8 +26,6 @@
   (find-file "~/.emacs.d/init.el"))
 
 (global-set-key (kbd "<f2>") 'open-init-file)
-
-(global-company-mode t)
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -70,14 +46,8 @@
 
 (global-hl-line-mode t)
 
-(load-theme 'monokai t)
 
-(require 'hungry-delete)
-(global-hungry-delete-mode)
 
-;;
-(ivy-mode t)
-(setq ivy-use-virtual-buffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -86,19 +56,6 @@
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 
-;; smartparens
-(require 'smartparens-config)
-;; (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(smartparens-global-mode)
-
-;; js2-mode
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       auto-mode-alist))
-
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
 
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-h C-v") 'find-variable)
