@@ -20,6 +20,7 @@
 		      js2-mode
 		      nodejs-repl
 		      exec-path-from-shell
+		      popwin
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -51,6 +52,7 @@
 (global-company-mode t)
 
 (setq make-backup-files nil)
+(setq auto-save-default nil)
 
 (require 'org)
 (setq org-src-fontify-natively t)
@@ -105,6 +107,8 @@
 ;; org
 (setq org-agenda-files '("~/Work/documents/org"))
 (global-set-key (kbd "C-c a") 'org-agenda)
+
+(global-auto-revert-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
