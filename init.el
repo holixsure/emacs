@@ -1,4 +1,47 @@
 
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (setq package-archives '(("gnu"     . "http://elpa.emacs-china.org/gnu/")
+			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+
+(require 'cl)
+
+(defvar my/packages '(
+		      ;; --- Auto-completion ---
+		      company
+		      ;; --- Better Editor ---
+		      hungry-delete
+		      swiper
+		      counsel
+		      ;; --- Major Mode ---
+		      js2-mode
+		      ;; --- Minor Mode ---
+		      nodejs-repl
+		      exec-path-from-shell
+		      ;; --- Themes ---
+		      ;; monokai-theme
+		      solarized-theme
+		      ) "Default packages")
+
+(setq package-selected-packages my/packages)
+
+(defun my/packages-installed-p ()
+  (loop for pkg in my/packages
+	when (not (package-installed-p pkg)) do (return nil)
+	finally (return t)))
+
+(unless (my/packages-installed-p)
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg my/packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
+
+;; Find Executable Path on OS X
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;; 关闭工具栏
 (tool-bar-mode -1)
 
@@ -19,10 +62,17 @@
 ;; 绑定到<F2>键上
 (global-set-key (kbd "<f2>") 'open-init-file)
 
+;; 关闭生成备份文件
+(setq make-backup-files nil)
+
 ;; 开启全局Company补全
 ;; (global-company-mode 1)
 
-;; 加载其他各系统特殊的配置
-(add-to-list 'load-path "~/.emacs.d/site-lisp/other/")
-;; 加载windows系统的配置
-(require 'windows)
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-item 10)
+
+(delete-selection-mode 1)
+
+;; windows下字体设置，不同系统请自行注释掉
+(set-default-font "-outline-微软雅黑-normal-normal-normal-sans-12-*-*-*-p-*-utf-8")
