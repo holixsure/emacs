@@ -66,7 +66,16 @@
 (setq make-backup-files nil)
 
 ;; 开启全局Company补全
-;; (global-company-mode 1)
+(global-company-mode 1)
+
+;; 全屏
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+
+;; 当前行高亮
+(global-hl-line-mode 1)
+
+;; 加载主题
+(load-theme 'solarized-light 1)
 
 (require 'recentf)
 (recentf-mode 1)
@@ -74,5 +83,6 @@
 
 (delete-selection-mode 1)
 
-;; windows下字体设置，不同系统请自行注释掉
+;; windows下字体设置，不同系统请自行注释掉，还没找到其他好的解决方案
 (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-12-*-*-*-p-*-utf-8")
+
