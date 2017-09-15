@@ -20,5 +20,9 @@
 (global-set-key (kbd "<f2>") 'open-init-file)
 
 ;; 开启全局Company补全
-(global-company-mode 1)
+;; (global-company-mode 1)
 
+;; 加载其他各系统特殊的配置
+(add-to-list 'load-path "~/.emacs.d/site-lisp/other/")
+;; 加载windows系统的配置
+(require 'windows)
