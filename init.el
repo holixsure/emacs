@@ -84,5 +84,5 @@
 (delete-selection-mode 1)
 
 ;; windows下字体设置，不同系统请自行注释掉，还没找到其他好的解决方案
-(set-default-font "-outline-微软雅黑-normal-normal-normal-sans-12-*-*-*-p-*-utf-8")
+;; (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-12-*-*-*-p-*-utf-8")
 
