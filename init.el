@@ -54,6 +54,9 @@
 ;; 更改光标样式
 (setq-default cursor-type 'bar)
 
+;; 关闭启动帮助界面
+(setq inhibit-splash-screen 1)
+
 ;; 快速打开配置文件
 (defun open-init-file()
   (interactive)
