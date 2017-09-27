@@ -16,6 +16,7 @@
 		      counsel
 		      ;; --- Major Mode ---
 		      js2-mode
+		      markdown-mode
 		      ;; --- Minor Mode ---
 		      nodejs-repl
 		      exec-path-from-shell
@@ -90,3 +91,8 @@
 (when (memq window-system '(w32))
   (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-12-*-*-*-p-*-utf-8"))
 
+;; 设置默认读入文件编码
+(prefer-coding-system 'utf-8)
+
+;; 设置写入文件编码
+(setq default-buffer-file-coding-system 'utf-8)
