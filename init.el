@@ -1,62 +1,17 @@
+;; My Emacs Configure
+(package-initialize)
 
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (setq package-archives '(("gnu"     . "http://elpa.emacs-china.org/gnu/")
-			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(require 'cl)
+;; Package Management
+;; -----------------------------------------------------------------------------
+(require 'init-packages)
+(require 'init-ui)
 
-(defvar my/packages '(
-		      ;; --- Auto-completion ---
-		      company
-		      ;; --- Better Editor ---
-		      hungry-delete
-		      swiper
-		      counsel
-		      ;; --- Major Mode ---
-		      js2-mode
-		      markdown-mode
-		      ;; --- Minor Mode ---
-		      nodejs-repl
-		      exec-path-from-shell
-		      ;; --- Themes ---
-		      ;; monokai-theme
-		      solarized-theme
-		      ) "Default packages")
-
-(setq package-selected-packages my/packages)
-
-(defun my/packages-installed-p ()
-  (loop for pkg in my/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (my/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
 
 ;; Find Executable Path on OS X
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
-
-;; 关闭工具栏
-(tool-bar-mode -1)
-
-;; 关闭文件滑动控件
-(scroll-bar-mode -1)
-
-;; 显示行号
-(global-linum-mode 1)
-
-;; 更改光标样式
-(setq-default cursor-type 'bar)
-
-;; 关闭启动帮助界面
-(setq inhibit-splash-screen 1)
 
 ;; 快速打开配置文件
 (defun open-init-file()
@@ -72,27 +27,18 @@
 ;; 开启全局Company补全
 (global-company-mode 1)
 
-;; 全屏
-(setq initial-frame-alist (quote ((fullscreen . maximized))))
-
-;; 当前行高亮
-(global-hl-line-mode 1)
-
-;; 加载主题
-(load-theme 'solarized-light 1)
-
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-item 10)
 
 (delete-selection-mode 1)
 
-;; 判断当前系统，如果为windows设置字体，默认字体会卡住
-(when (memq window-system '(w32))
-  (set-default-font "-outline-微软雅黑-normal-normal-normal-sans-12-*-*-*-p-*-utf-8"))
-
 ;; 设置默认读入文件编码
 (prefer-coding-system 'utf-8)
 
 ;; 设置写入文件编码
 (setq default-buffer-file-coding-system 'utf-8)
+
+;; ivy-mode
+(ivy-mode 1)
+(global-set-key "\C-s" 'swiper)
