@@ -23,10 +23,11 @@
 (global-hl-line-mode 1)
 
 ;; 设置字体大小 13pt
-(set-face-attribute 'default nil :height 130)
+;; (set-face-attribute 'default nil :height 130)
 
 ;; 加载主题
-(load-theme 'solarized-light 1)
+;; (load-theme 'solarized-light t)
+;; (load-theme 'material t)
 
 ;; 判断当前系统，如果为windows设置字体，默认字体会卡住
 (when (memq window-system '(w32))

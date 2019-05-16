@@ -7,6 +7,8 @@
 ;; -----------------------------------------------------------------------------
 (require 'init-packages)
 (require 'init-ui)
+(require 'init-py)
+(require 'unicad)
 
 
 ;; Find Executable Path on OS X
@@ -21,7 +23,8 @@
 ;; 绑定到<F2>键上
 (global-set-key (kbd "<f2>") 'open-init-file)
 
-;; 关闭生成备份文件
+;; disable auto-save and auto-backup
+(setq auto-save-default nil)
 (setq make-backup-files nil)
 
 ;; 开启全局Company补全

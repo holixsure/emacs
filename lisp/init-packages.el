@@ -2,7 +2,7 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
-  (setq package-archives '(("gnu"     . "http://elpa.emacs-china.org/gnu/")
+  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 			   ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
 
 (require 'cl)
@@ -21,8 +21,13 @@
 		      nodejs-repl
 		      exec-path-from-shell
 		      ;; --- Themes ---
-		      ;; monokai-theme
+		      monokai-theme
 		      solarized-theme
+		      material-theme
+		      ;; --- unknown ---
+		      elpy
+		      py-autopep8
+		      flycheck
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
